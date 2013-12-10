@@ -103,14 +103,17 @@ module Quantified
     end
     
     protected
-    
-    class_inheritable_accessor :add_numeric_methods, :primitives, :conversions, :current_system, :systems_to_units, :units_to_systems
-    self.add_numeric_methods = false
-    self.primitives = []
-    self.conversions = {}
-    self.current_system = nil
-    self.systems_to_units = {}
-    self.units_to_systems = {}
+
+    class << self
+      def primitives;              @primitives ||= [];             end
+      def add_numeric_methods;     @add_numeric_methods ||= false; end
+      def add_numeric_methods=(v); @add_numeric_methods = v;       end
+      def conversions;             @conversions ||= {};            end
+      def current_system;          @current_system;                end
+      def current_system=(v);      @current_system = v;            end
+      def systems_to_units;        @systems_to_units ||= {};       end
+      def units_to_systems;        @units_to_systems ||= {};       end
+    end
     
     def self.system(system_name, &block)
       old_system = self.current_system
